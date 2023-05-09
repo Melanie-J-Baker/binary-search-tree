@@ -16,7 +16,7 @@ export class Tree {
         //sort array and remove duplicates
         const prepared = this.prepareArr(arr);
         if (prepared.length === 0) return null;
-        let mid = parseInt(prepared.length / 2);
+        let mid = Math.floor(prepared.length / 2);
         let node = new Node(
             prepared[mid],
             this.buildTree(prepared.slice(0, mid)),
@@ -41,7 +41,9 @@ export class Tree {
 
     // find function which accepts a value and returns node with given value
     find (value, root = this.root) {
-
+        if (root == null || root.data == value) return root;
+        if (root.data < value) return this.find(value, root.right);
+        return this.find(root.left, value);
     }
 
     /* levelOrder function which accepts another function as a parameter.

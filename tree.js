@@ -28,12 +28,15 @@ export class Tree {
 
     // insert function which accepts a value to insert
     insert (value, root = this.root) {
-
+        if (root === null) return new Node(value);
+        root.data < value ? (root.right = this.insert(value, root.right)) : (root.left = this.insert(value, root.left));
+        return root;
     }
 
     // delete function which accepts a value to delete (will have to deal with several cases such as when a node has children or not)
     delete (value, root = this.root) {
-
+        if (root === null) return root;
+        //if (root.data < value) root.right = this.delete(value, root.right)..........
     }
 
     // find function which accepts a value and returns node with given value

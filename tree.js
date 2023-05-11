@@ -1,6 +1,6 @@
-import Node from "./node";
+import Node from "./node.js";
 /* Tree class/factory which accepts an array when initialised. Should have a root attribute which uses the return value of buildTree */
-export class Tree {
+export default class Tree {
     constructor (arr) {
         this.root = this.buildTree(arr);
     }

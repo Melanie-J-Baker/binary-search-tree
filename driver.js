@@ -1,4 +1,4 @@
-import Tree from "./tree";
+import Tree from "./tree.js";
 
 //Create a BST from an array of random nos. Can create function that returns array of random numbers if you wish
 const randomArr = (length) => {
@@ -6,6 +6,7 @@ const randomArr = (length) => {
 };
 
 const tree = new Tree(randomArr(20));
+console.log('Balanced:', tree.isBalanced());
 
 // Confirm that tree is balanced by calling isBalanced
 

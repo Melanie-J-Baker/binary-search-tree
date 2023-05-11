@@ -1,0 +1,21 @@
+{
+  "name": "binary-search-tree",
+  "version": "1.0.0",
+  "description": "Project from the Odin Project.",
+  "main": "driver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Melanie-J-Baker/binary-search-tree.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Melanie-J-Baker/binary-search-tree/issues"
+  },
+  "homepage": "https://github.com/Melanie-J-Baker/binary-search-tree#readme"
+}

@@ -7,8 +7,8 @@ export class Tree {
 
     // Sort and remove duplicates
     prepareArr (arr) {
-        const prepared = [...new Set(arr.sort((a, b) => a - b))];
-        return prepared;
+        const sorted = [...new Set(arr.sort((a, b) => a - b))];
+        return sorted;
     }
 
     // buildTree function which takes an array of data and turns it into a balanced BST full of Node objects appropriately placed
@@ -52,6 +52,7 @@ export class Tree {
     Tip: Use an array acting as a queue to keep track of all child nodes that you have yet to traverse and to add new ones to list (Video! - Binary tree - Level Order Traversal) 
     As we visit a node, can reference all of its children in a queue so we can visit them later*/
     levelOrder (callback) {
+
         // Start with address of root node in queue
         // As long as queue has at least one discovered node, we can take out a node from the front, visit it, and then enqueue it's children
         // Visit the root
@@ -88,7 +89,10 @@ export class Tree {
 
     // height function which accepts a node and returns its height (defined as no of edges in longest path from a given node to a leaf node)
     height (node = this.root) {
-
+        if (node === null) return -1;
+        const heightLeft = this.height(node.left);
+        const heightRight = this.height(node.right);
+        return Math.max(heightLeft, heightRight) + 1;
     }
 
     // depth function which accepts a node and returns its depth (defined as the no of edges in path from a given node tree's root node)

@@ -39,8 +39,33 @@ export default class Tree {
 
     // delete function which accepts a value to delete (will have to deal with several cases such as when a node has children or not)
     delete (value, root = this.root) {
-        if (root === null) return root;
-        //if (root.data < value) root.right = this.delete(value, root.right)..........
+        if (root === null) {
+            return root;
+        } else if (root.data < value) {
+            root.right = this.delete(value, root.right);
+        } else if (root.data > value) {
+            root.left = this.delete(value, root.left);
+        } else {
+            if (root.left === null) {
+                return root.right;
+            } else if (root.right === null) {
+                return root.left;
+            } else {
+                const nextSmallest = (root) => {
+                    let smallest = root.data;
+                    let newRoot = root;
+                    while (newRoot.left !== null) {
+                        smallest = root.left.data;
+                        newRoot = root.left;
+                    }
+                    return smallest;
+                }
+                root.data = nextSmallest(root.right);
+                // Remove copied node from nextSmallest()
+                root.right = this.delete(root.data, root.right);
+            }
+        }
+        return root;
     }
 
     // find function which accepts a value and returns node with given value

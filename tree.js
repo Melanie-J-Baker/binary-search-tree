@@ -77,14 +77,18 @@ export default class Tree {
     preorder (root = this.root, result = []) {
         if (root === null) return;
         result.push(root.data);
-        if (root.left) this.predorder(root.left, result);
+        if (root.left) this.preorder(root.left, result);
         if (root.right) this.preorder(root.right, result);
         return result;
     };
         
     // left right root
-    postorder (callback) {
-
+    postorder (root = this.root, result = []) {
+        if (root === null) return;
+        if (root.left) this.postorder(root.left, result);
+        if (root.right) this.postorder(root.right, result);
+        result.push(root.data);
+        return result;
     };
 
     // height function which accepts a node and returns its height (defined as no of edges in longest path from a given node to a leaf node)

@@ -75,11 +75,26 @@ export default class Tree {
         return this.find(value, root.left);
     }
 
-    /* levelOrder function which accepts another function as a parameter.
+    /* levelOrder function which accepts function as a parameter.
     Traverse tree in breadth-first level order and provide each node as argument to provided function.
-    Can be implemented using iteration or recursion (try both!). Should return an array of values if no function is given. 
-    Tip: Use an array acting as a queue to keep track of all child nodes that you have yet to traverse and to add new ones to list - last in first out*/
+    Can be implemented using iteration or recursion (try both!). Return array of values if no function is given */
     levelOrder (callback) {
+        if (!this.root) return [];
+        const q = [this.root];
+        const result = [];
+        while (q.length != 0) {
+            let lvl = [];
+            let qLength = q.length;
+            for (let i = 0; i < qLength; i++) {
+                const current = q.shift();
+                lvl.push(current.data);
+                if (current.left) q.push(current.left);
+                if (current.right) q.push(current.right);
+                if (callback) callback(current);
+            }
+            result.push(lvl);
+        }
+        if (!callback) return result;
         // Start with address of root node in queue
         // As long as queue has at least one discovered node, we can take out a node from the front, visit it, and then enqueue it's children
         // Visit the root
@@ -89,7 +104,7 @@ export default class Tree {
     }
 
     /* inorder, preorder, and postorder functions that accept a function parameter. 
-    Each should traverse tree in their respective depth-first order and yield each node to provided function given as an argument. 
+    Each should traverse tree in their respective depth-first order and yield each node to provided function. 
     Functions shouold return an array of values if no function is given */
     
     // left root right - gives you a sorted list

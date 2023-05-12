@@ -37,7 +37,7 @@ export default class Tree {
         return root;
     }
 
-    // delete function which accepts a value to delete (will have to deal with several cases such as when a node has children or not)
+    // delete function - accepts value to delete
     delete (value, root = this.root) {
         if (root === null) {
             return root;
@@ -77,7 +77,7 @@ export default class Tree {
 
     /* levelOrder function which accepts function as a parameter.
     Traverse tree in breadth-first level order and provide each node as argument to provided function.
-    Can be implemented using iteration or recursion (try both!). Return array of values if no function is given */
+    Return array of values if no function is given */
     levelOrder (callback) {
         if (!this.root) return [];
         const q = [this.root];
@@ -95,19 +95,13 @@ export default class Tree {
             result.push(lvl);
         }
         if (!callback) return result;
-        // Start with address of root node in queue
-        // As long as queue has at least one discovered node, we can take out a node from the front, visit it, and then enqueue it's children
-        // Visit the root
-        // Traverse to left and right children -> add to queue
-        // Move to next level
-
     }
 
     /* inorder, preorder, and postorder functions that accept a function parameter. 
-    Each should traverse tree in their respective depth-first order and yield each node to provided function. 
-    Functions shouold return an array of values if no function is given */
+    Traverse tree in respective depth-first order and yield each node to provided function. 
+    Functions should return an array of values if no function is given */
     
-    // left root right - gives you a sorted list
+    // left root right - gives a sorted list
     inorder (root = this.root, callback, result = []) {
         if (!this.root) return [];
         if (root === null) return;
@@ -116,7 +110,7 @@ export default class Tree {
         this.inorder(root.right, callback, result);
         if (result) return result;
     }
-    // root left right - for each node read data, go left until no more left - then go up and right
+    // root left right
     preorder (callback) {
         if (!this.root) return [];
         const stack = [this.root];
@@ -146,7 +140,7 @@ export default class Tree {
         if (!callback) return result.reverse();
     };
 
-    // height function which accepts a node and returns its height (defined as no of edges in longest path from a given node to a leaf node)
+    // height function which accepts a node and returns its height (no of edges in longest path from a given node to a leaf node)
     height (node = this.root) {
         if (node === null) return -1;
         const heightLeft = this.height(node.left);
@@ -155,16 +149,29 @@ export default class Tree {
     }
 
     // depth function which accepts a node and returns its depth (defined as the no of edges in path from a given node tree's root node)
-    depth (node, root = this.root, level = 0) {
-
+    depth (node, root = this.root, lvl = 0) {
+        if (!node) return null;
+        if (root === null) return 0;
+        if (root.data === node.data) return lvl;
+        let total = this.depth(node, root.left, lvl + 1);
+        if (total !== 0) return total;
+        return this.depth(node, root.right, lvl + 1);
     };
 
     // isBalanced function which checks if tree is balanced (difference between heights of left subtree and right subtree of every node is not more than 1)
     isBalanced (node = this.root) {
-
+        const heightLeft = this.height(node.left);
+        const heightRight = this.height(node.right);
+        const difference = Math.abs(heightLeft - heightRight);
+        if (difference < 2) {
+            return true;
+        } else {
+            return false;
+        }
     };
 
-    // rebalance function which rebalances an unbalanced tree. Tip: Use a traversal method to provide a new array to the buildTree function
+    // rebalance function which rebalances an unbalanced tree. 
+    // Tip: Use a traversal method to provide a new array to the buildTree function
     rebalance () {
 
     };

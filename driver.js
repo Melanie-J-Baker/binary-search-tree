@@ -18,7 +18,16 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 
 const tree = new Tree(randomArr(10));
 prettyPrint(tree.root);
-console.log('Balanced:', tree.isBalanced());
+console.log('Balanced: ', tree.isBalanced());
+console.log('Level Order: ', tree.levelOrder());
+console.log('Preorder: ', tree.preorder());
+console.log('Inorder: ', tree.inorder());
+
+tree.insert(350);
+tree.insert(600);
+tree.insert(900);
+console.log('Balanced: ', tree.isBalanced());
+
 
 // Confirm that tree is balanced by calling isBalanced
 

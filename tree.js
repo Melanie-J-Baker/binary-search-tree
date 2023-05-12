@@ -28,11 +28,14 @@ export default class Tree {
 
     // insert function which accepts a value to insert
     insert (value, root = this.root) {
-        if (root === null) return new Node(value);
+        if (root === null) {
+            root = new Node(value);
+            return root;
+        }
         if (value < root.data) {
-            root.left = insert(root.left, value);
+            root.left = this.insert(value, root.left);
         } else if (value > root.data) {
-            root.right = insert(root.right, value);
+            root.right = this.insert(value, root.right);
         }
         return root;
     }

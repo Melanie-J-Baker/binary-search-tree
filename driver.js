@@ -21,12 +21,21 @@ prettyPrint(tree.root);
 console.log('Balanced: ', tree.isBalanced());
 console.log('Level Order: ', tree.levelOrder());
 console.log('Preorder: ', tree.preorder());
+console.log('Postorder: ', tree.postorder());
 console.log('Inorder: ', tree.inorder());
 
 tree.insert(350);
 tree.insert(600);
 tree.insert(900);
+prettyPrint(tree.root);
 console.log('Balanced: ', tree.isBalanced());
+tree.rebalance();
+prettyPrint(tree.root);
+console.log('Balanced: ', tree.isBalanced());
+console.log('Level Order: ', tree.levelOrder());
+console.log('Preorder: ', tree.preorder());
+console.log('Postorder: ', tree.postorder());
+console.log('Inorder: ', tree.inorder());
 
 
 // Confirm that tree is balanced by calling isBalanced

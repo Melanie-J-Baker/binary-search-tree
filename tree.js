@@ -93,11 +93,13 @@ export default class Tree {
     Functions shouold return an array of values if no function is given */
     
     // left root right - gives you a sorted list
-    inorder (root = this.root, result = []) {
+    inorder (root = this.root, callback, result = []) {
+        if (!this.root) return [];
         if (root === null) return;
-        if (root.left) this.inorder(root.left, result);
-        result.push(root.data);
-        if (root.right) this.inorder(root.right, result);
+        this.inorder(root.left, callback, result);
+        callback ? callback(root) : result.push(root.data);
+        this.inorder(root.right, callback, result);
+        if (result) return result;
     }
     // root left right - for each node read data, go left until no more left - then go up and right
     preorder (callback) {
@@ -105,22 +107,28 @@ export default class Tree {
         const stack = [this.root];
         const result = [];
         while (stack.length != 0) {
-            const node = stack.pop();
-            if (node.right) stack.push(node.right);
-            if (node.left) stack.push(node.left);
-            if (callback) callback(node);
-            result.push(node.data);
+            const current = stack.pop();
+            if (current.right) stack.push(current.right);
+            if (current.left) stack.push(current.left);
+            if (callback) callback(current);
+            result.push(current.data);
         }
         if (!callback) return result;
     };
         
     // left right root
-    postorder (root = this.root, result = []) {
-        if (root === null) return;
-        if (root.left) this.postorder(root.left, result);
-        if (root.right) this.postorder(root.right, result);
-        result.push(root.data);
-        return result;
+    postorder (callback) {
+        if (!this.root) return [];
+        const stack = [this.root];
+        const result = [];
+        while (stack.length !== 0) {
+            const current = stack.pop();
+            if (current.left) stack.push(current.left);
+            if (current.right) stack.push(current.right);
+            if (callback) callback(current);
+            result.push(current.data);
+        }
+        if (!callback) return result.reverse();
     };
 
     // height function which accepts a node and returns its height (defined as no of edges in longest path from a given node to a leaf node)

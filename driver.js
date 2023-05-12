@@ -5,7 +5,19 @@ const randomArr = (length) => {
     return Array.from({ length: length }, () => Math.floor(Math.random() * 100));
 };
 
-const tree = new Tree(randomArr(20));
+const prettyPrint = (node, prefix = '', isLeft = true) => {
+    if (node.right !== null) {
+        prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+    }
+    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+    if (node.left !== null) {
+        prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+    }
+}
+    
+
+const tree = new Tree(randomArr(10));
+prettyPrint(tree.root);
 console.log('Balanced:', tree.isBalanced());
 
 // Confirm that tree is balanced by calling isBalanced

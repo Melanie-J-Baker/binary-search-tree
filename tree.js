@@ -158,7 +158,7 @@ export default class Tree {
         return this.depth(node, root.right, lvl + 1);
     };
 
-    // isBalanced function which checks if tree is balanced (difference between heights of left subtree and right subtree of every node is not more than 1)
+    // isBalanced function which checks if tree is balanced (difference between heights of left/right subtree of every node is not more than 1)
     isBalanced (node = this.root) {
         const heightLeft = this.height(node.left);
         const heightRight = this.height(node.right);
@@ -173,7 +173,10 @@ export default class Tree {
     // rebalance function which rebalances an unbalanced tree. 
     // Tip: Use a traversal method to provide a new array to the buildTree function
     rebalance () {
-
+        if (this.root === null) return;
+        const inorder = this.inorder();
+        this.prepareArr(inorder);
+        this.root = this.buildTree(inorder);
     };
 }
 

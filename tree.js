@@ -76,10 +76,9 @@ export default class Tree {
     }
 
     /* levelOrder function which accepts another function as a parameter.
-    Should traverse tree in breadth-first level order (visit all nodes at same depth/level before visiting nodes at next level) and provide each node as the argument to the provided function.
+    Traverse tree in breadth-first level order and provide each node as argument to provided function.
     Can be implemented using iteration or recursion (try both!). Should return an array of values if no function is given. 
-    Tip: Use an array acting as a queue to keep track of all child nodes that you have yet to traverse and to add new ones to list (Video! - Binary tree - Level Order Traversal) 
-    As we visit a node, can reference all of its children in a queue so we can visit them later*/
+    Tip: Use an array acting as a queue to keep track of all child nodes that you have yet to traverse and to add new ones to list - last in first out*/
     levelOrder (callback) {
         // Start with address of root node in queue
         // As long as queue has at least one discovered node, we can take out a node from the front, visit it, and then enqueue it's children
@@ -90,7 +89,9 @@ export default class Tree {
     }
 
     /* inorder, preorder, and postorder functions that accept a function parameter. 
-    Each should traverse tree in their respective depth-first order and yield each node to provided function given as an argument. Functions shouold return an array of values if no function is given */
+    Each should traverse tree in their respective depth-first order and yield each node to provided function given as an argument. 
+    Functions shouold return an array of values if no function is given */
+    
     // left root right - gives you a sorted list
     inorder (root = this.root, result = []) {
         if (root === null) return;
@@ -99,12 +100,18 @@ export default class Tree {
         if (root.right) this.inorder(root.right, result);
     }
     // root left right - for each node read data, go left until no more left - then go up and right
-    preorder (root = this.root, result = []) {
-        if (root === null) return;
-        result.push(root.data);
-        if (root.left) this.preorder(root.left, result);
-        if (root.right) this.preorder(root.right, result);
-        return result;
+    preorder (callback) {
+        if (!this.root) return [];
+        const stack = [this.root];
+        const result = [];
+        while (stack.length != 0) {
+            const node = stack.pop();
+            if (node.right) stack.push(node.right);
+            if (node.left) stack.push(node.left);
+            if (callback) callback(node);
+            result.push(node.data);
+        }
+        if (!callback) return result;
     };
         
     // left right root

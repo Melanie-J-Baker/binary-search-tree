@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/Melanie-J-Baker/binary-search-tree/issues"
   },
-  "homepage": "https://github.com/Melanie-J-Baker/binary-search-tree#readme"
+  "homepage": "https://github.com/Melanie-J-Baker/binary-search-tree#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.2.0",
+    "eslint": "^9.2.0",
+    "globals": "^15.2.0"
+  }
 }
